@@ -1,5 +1,5 @@
 % LaTeX source for textbook ``How to think like a computer scientist''
-% Copyright (C) 1999  Allen B. Downey
+% Copyright (C) 2023  Lisa Patacchiola and Allen B. Downey
 
 
 
@@ -102,15 +102,15 @@ of executor.  The role of the executor is to load the program
 executing the program.
 
 Although this process may seem complicated, the good news is that in
-most programming environments (sometimes called development
-environments), these steps are automated for you.  Usually you will
+most programming environments (sometimes called integrated development
+environments(IDE)), these steps are automated for you.  Usually you will
 only have to write a program and type a single command to compile and
 run it.  On the other hand, it is useful to know what the steps are
 that are happening in the background so that if something goes wrong,
 you can figure out what it is.
 
 The longer code examples in this book will use Replit.com, an online programming
-platform, and community. Code listings include links to the “repl” that you can copy 
+platform/IDE, and community. Code listings include links to the “repl” that you can copy 
 (“fork”) and experiment with.
 
 \section{What is a program?}
@@ -120,7 +120,7 @@ a computation.  The computation might be something mathematical, like
 solving a system of equations or finding the roots of a polynomial,
 but it can also be a symbolic computation, like searching and
 replacing text in a document or (strangely enough) compiling a
-program.
+program. Or, it could be something fun, like a character trying to walk around and find a dragon. All of these things can be done with a program.
 
 \index{statement}
 
@@ -137,13 +137,13 @@ other device.
 file or other device.
 
 \item[math:] Perform basic mathematical operations like addition and
-multiplication.
+multiplication. (Sometimes called "Processing")
 
 \item[testing:] Check for certain conditions and execute the
-appropriate sequence of statements.
+appropriate sequence of statements. (Sometimes called "Selection")
 
 \item[repetition:] Perform some action repeatedly, usually with
-some variation.
+some variation. (Sometimes called "Iteration")
 
 \end{description}
 
@@ -202,6 +202,7 @@ spend a lot of time tracking down syntax errors.  As you
 gain experience, though, you will make fewer errors and find
 them faster.
 
+When you get a syntax error, don't think that the compiler is yelling at you for getting something wrong. Think of it ask asking you for help. "Help" it is saying "I have no idea what this means, please help me". Honestly, I like syntax errors more than any of the other types of errors. Syntax errors are one of the few errors where the computer tells you it found a problem and suggests what it thinks is wrong. 
 \subsection{Run-time errors}
 \label{run-time}
 \index{run-time error}
@@ -231,7 +232,17 @@ do what you told it to do.
 
 The problem is that the program you wrote is not the program
 you wanted to write.  The meaning of the program (its semantics)
-is wrong.  Identifying logical errors can be tricky, since
+is wrong.  
+
+Let's say you have a program that tells the computer to do the following steps:
+\begin{enumerate}
+    \item Get the pitcher of water
+    \item Pour the water
+    \item Get the glass
+\end{enumerate}
+A person would see that list and would assume you meant to get the glass first. The computer would do exactly as you asked and spill water on the table and then put a glass on top. There was an obvious logical error in your program, but it ran without a compile error. As far as the computer was concerned, it ran perfectly. But, you know that was not your original intent.
+
+Identifying logical errors can be tricky, since
 it requires you to work backwards by looking at the output
 of the program and trying to figure out what it is doing.
 
@@ -405,25 +416,26 @@ Traditionally the first program people write in a new language
 is called ``Hello, World.'' because all it does is print the
 words ``Hello, World.''  In C++, this program looks like this:
 
+\begin{mdframed}
 \begin{verbatim}
 #include <iostream>
-using namespace std;
 
 // main: generate some simple output
 
 int main ()
 {
-  cout << "Hello, world." << endl;
+  std::cout << "Hello, world." << std::endl;
   return 0;
 }
 \end{verbatim}
 %
+\end{mdframed}
 Some people judge the quality of a programming language by
 the simplicity of the ``Hello, World.'' program.  By this
 standard, C++ does reasonably well.  Even so, this simple
 program contains several features that are hard to explain to
 beginning programmers.  For now, we will ignore some of
-them, like the first two lines.
+them, like the first line.
 
 \index{comment}
 \index{statement!comment}
@@ -450,18 +462,18 @@ main}, but the example contains only one.  It is a basic {\bf
 output} statement, meaning that it outputs or displays a message on
 the screen.  
 
-{\tt cout} is a special object provided by the system to allow
+{\tt std::cout} is a special object provided by the system to allow
 you to send output to the screen.  The symbol {\tt <<} is an
-{\bf operator} that you apply to {\tt cout} and a string, and that
+{\bf operator} that you apply to {\tt std::cout} and a string, and that
 causes the string to be displayed.
 
 \index{operator}
 
-{\tt endl} is a special symbol that represents the end of a
-line.  When you send an {\tt endl} to {\tt cout}, it causes the
+{\tt std::endl} is a special symbol that represents the end of a
+line.  When you send an {\tt std::endl} to {\tt std::cout}, it causes the
 cursor to move to the next line of the display.
 The next time you output something, the new text appears
-on the next line.
+on the next line. (Note: the word is endl ends with an L, not a 1.)
 
 Like all statements, the output statement ends with a
 semi-colon ({\tt ;}).
@@ -478,11 +490,18 @@ At this point it would be a good idea to sit down in front of
 a computer and compile and run this program.  
 
 To try program out, go to:
-\url{https://replit.com/@lpatacch/helloWorld#main.cpp}
+\url{https://replit.com/@lpatacch/helloWorld#hello.cpp}
 
-The details of how
-to do that depend on your programming environment, but from now
-on in this book I will assume that you know how to do it.
+When the project is loaded, you should see a button that looks like Figure \ref{fig:Run}.
+\smallskip
+\begin{figure}
+    \centering
+    \includegraphics{Run}
+    \caption{The Run button on Replit}
+    \label{fig:Run}
+\end{figure}
+
+If you click that "Run" button, it will compile the code and run it. You should see the words "Hello World!" on the right side of the environment. Congratulations! You just created your first program!
 
 As I mentioned, the C++ compiler is a real stickler for syntax.
 If you make any errors when you type in the program, chances
@@ -505,7 +524,7 @@ with that name, but I did find something named iostream.  Is
 that what you meant, by any chance?''
 \end{quote}
 
-Unfortunately, few compilers are so accomodating.  The compiler
+Unfortunately, few compilers are so accommodating.  The compiler
 is not really very smart, and in most cases the error message
 you get will be only a hint about what is wrong.  It will take
 some time to gain facility at interpreting compiler messages.

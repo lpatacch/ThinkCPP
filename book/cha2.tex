@@ -1,5 +1,5 @@
 % LaTeX source for textbook ``How to think like a computer scientist''
-% Copyright (C) 1999  Allen B. Downey
+% Copyright (C) 2023  Lisa Patacchiola and Allen B Downey
 
 
 \chapter{Variables and types}
@@ -11,26 +11,39 @@
 As I mentioned in the last chapter, you can put as many statements as
 you want in {\tt main}.  For example, to output more than one line:
 
+\begin{mdframed}
 \begin{verbatim}
 #include <iostream>
-using namespace std;
+
 // main: generate some simple output
 
 int main ()
 {
-  cout << "Hello, world." << endl;     // output one line
-  cout << "How are you?" << endl;      // output another
+  std::cout << "Hello, world." << std::endl; // output 1 line
+  std::cout << "How are you?" << std::endl;  // output 1 more
   return 0;
 }
 \end{verbatim}
 %
+\end{mdframed}
+
 As you can see, it is legal to put comments at the
 end of a line, as well as on a line by themselves.
+
+If you want to try that with the replit code, go back to the link from the last chapter 
+\url{https://replit.com/@lpatacch/helloWorld#hello.cpp}. Then, look for a button on the right hand of the screen with the words "Fork Repl". It should look like Figure \ref{fig:fork}
+\begin{figure}
+    \centering
+    \includegraphics{fork}
+    \caption{The Fork button on Replit}
+    \label{fig:fork}
+\end{figure}
+You now should have a copy of the code that you can change any way you want.
 
 \index{String}
 \index{type!String}
 
-The phrases that appear in quotation marks are called {\bf strings},
+In the program. the phrases that appear in quotation marks are called {\bf strings},
 because they are made up of a sequence (string) of letters.  Actually,
 strings can contain any combination of letters, numbers, punctuation
 marks, and other special characters.
@@ -41,15 +54,18 @@ Often it is useful to display the output from multiple output
 statements all on one line.  You can do this by leaving out
 the first {\tt endl}:
 
+\begin{mdframed}
+
 \begin{verbatim}
 int main ()
 {
-  cout << "Goodbye, ";
-  cout << "cruel world!" << endl;
+  std::cout << "Goodbye, ";
+  std::cout << "cruel world!" << std::endl;
   return 0
 }
 \end{verbatim}
 %
+\end{mdframed}
 In this case the output appears on a single line as
 {\tt Goodbye, cruel world!}.  Notice that there is a space
 between the word ``Goodbye,'' and the second quotation mark.
@@ -60,23 +76,30 @@ Spaces that appear outside of quotation marks generally do
 not affect the behavior of the program.  For example, I
 could have written:
 
+\begin{mdframed}
+
 \begin{verbatim}
 int main ()
 {
-  cout<<"Goodbye, ";
-  cout<<"cruel world!"<<endl;
+  std::cout<<"Goodbye, ";
+  std::cout<<"cruel world!"<<std::endl;
   return 0;
 }
 \end{verbatim}
 %
+\end{mdframed}
 This program would compile and run just as well as the original.
 The breaks at the ends of lines (newlines) do not affect
 the program's behavior either, so I could have written:
 
+\begin{mdframed}
+
 \begin{verbatim}
-int main(){cout<<"Goodbye, ";cout<<"cruel world!"<<endl;return 0;}
+int main(){std::cout<<"Goodbye, ";std::cout<<"cruel world!"
+    <<std::endl;return 0;}
 \end{verbatim}
 %
+\end{mdframed}
 That would work, too, although you have probably noticed that
 the program is getting harder and harder to read.  Newlines and
 spaces are useful for organizing your program visually, making
@@ -96,18 +119,27 @@ There are other kinds of values, including integers and characters.
 An integer is a whole number like 1 or 17.  You can output
 integer values the same way you output strings:
 
+\begin{mdframed}
+
 \begin{verbatim}
-  cout << 17 << endl;
+  std::cout << 17 << std::endl;
 \end{verbatim}
 %
+
+\end{mdframed}
 A character value is a letter or digit or punctuation mark
 enclosed in single quotes, like {\tt 'a'} or {\tt '5'}.
 You can output character values the same way:
 
+
+\begin{mdframed}
+
 \begin{verbatim}
-  cout << '}' << endl;
+  std::cout << '}' << std::endl;
 \end{verbatim}
 %
+
+\end{mdframed}
 This example outputs a single close squiggly-brace on a line
 by itself.
 
@@ -131,10 +163,14 @@ variable, you have to declare what type it is.  For example, the
 character type in C++ is called {\tt char}.  The following statement
 creates a new variable named {\tt fred} that has type {\tt char}.
 
+\begin{mdframed}
+
 \begin{verbatim}
     char fred;
 \end{verbatim}
 %
+
+\end{mdframed}
 This kind of statement is called a {\bf declaration}.
 
 The type of a variable determines what kind of values it can
@@ -149,21 +185,29 @@ are going to skip that for now (see Chapter~\ref{strings}).
 
 To create an integer variable, the syntax is 
 
+\begin{mdframed}
+
 \begin{verbatim}
   int bob;
 \end{verbatim}
 %
+
+\end{mdframed}
 where {\tt bob} is the arbitrary name you made up for the
 variable.  In general, you will want to make up variable names
 that indicate what you plan to do with the variable.  For
 example, if you saw these variable declarations:
+
+\begin{mdframed}
 
 \begin{verbatim}
     char firstLetter;
     char lastLetter;
     int hour, minute;
 \end{verbatim}
+\end{mdframed}
 %
+
 you could probably make a good guess at what values
 would be stored in them.  This example
 also demonstrates the syntax for declaring multiple variables
@@ -178,11 +222,14 @@ Now that we have created some variables, we would like to
 store values in them.  We do that with an {\bf assignment
 statement}.
 
+\begin{mdframed}
+
 \begin{verbatim}
     firstLetter = 'a';   // give firstLetter the value 'a'
     hour = 11;           // assign the value 11 to hour
     minute = 59;         // set minute to 59
 \end{verbatim}
+\end{mdframed}
 %
 This example shows three assignments, and the comments show
 three different ways people sometimes talk about assignment
@@ -217,10 +264,14 @@ value you assign it.  For example, you cannot store a string in
 an {\tt int} variable.  The following statement generates a compiler
 error.
 
+\begin{mdframed}
+
 \begin{verbatim}
   int hour;
   hour = "Hello.";       // WRONG !!
 \end{verbatim}
+
+\end{mdframed}
 %
 This rule is sometimes a source of confusion, because there are many
 ways that you can convert values from one type to another, and C++
@@ -244,7 +295,7 @@ This assignment is illegal:
 
 You can output the value of a variable using the same commands
 we used to output simple values.
-
+\begin{mdframed}
 \begin{verbatim}
   int hour, minute;
   char colon;
@@ -253,12 +304,13 @@ we used to output simple values.
   minute = 59;
   colon = ':';
 
-  cout << "The current time is ";
-  cout << hour;
-  cout << colon;
-  cout << minute;
-  cout << endl;
+  std::cout << "The current time is ";
+  std::cout << hour;
+  std::cout << colon;
+  std::cout << minute;
+  std::cout << sdt::endl;
 \end{verbatim}
+\end{mdframed}
 %
 This program creates two integer variables named {\tt hour} and {\tt
 minute}, and a character variable named {\tt colon}.  It assigns
@@ -271,11 +323,13 @@ The current time is 11:59
 
 When we talk about ``outputting a variable,'' we mean outputting the
 {\em value} of the variable.  To output the {\em name} of a variable,
-you have to put it in quotes.  For example: {\tt cout << "hour";}
+you have to put it in quotes.  For example: {\tt std::cout << "hour";}
 
 As we have seen before, you can include more than one value in
 a single output statement, which can make the previous program more
 concise:
+
+\begin{mdframed}
 
 \begin{verbatim}
   int hour, minute;
@@ -285,17 +339,44 @@ concise:
   minute = 59;
   colon = ':';
 
-  cout << "The current time is " << hour << colon << minute << endl;
+  std::cout << "The current time is " << hour << colon 
+                << minute << std::endl;
 \end{verbatim}
+\end{mdframed}
 %
 On one line, this program outputs a string, two integers, a character,
 and the special value {\tt endl}.  Very impressive!
 
+
+\section{Variable Naming Rules}
+\index{variable naming rules}
+A few sections ago, I said that you can make up any name you
+want for your variables, but that's not quite true. There are certain rules that you need to follow.
+\begin{enumerate}
+    \item The name can not start with a number. (It is ok for a number to be in the name, it just can't be the first letter.)
+    \item No spaces in the name
+    \item Capitalization matters (num is different than NUM) 
+    \item No special characters can be in the name other than underscore.
+\end{enumerate}
+
+Here are some examples of variables that do not follow the naming rules, and what you can use instead
+\begin{mdframed}
+\begin{verbatim}
+    int 3player;    \\WRONG, can not start with a number
+    int player3;    \\This would work
+    int my3player   \\This will also work
+    
+    int hit points; \\WRONG, spaces not allowed in the name
+    int hitPoints;  \\ This would work
+    int hit_points; \\ This also would work
+    
+    int cash$;      \\This would not work because of $sign
+    int cashMoney;  \\changed to use words instead
+\end{verbatim}
+\end{mdframed}
 \section{Keywords}
 \index{keyword}
-
-A few sections ago, I said that you can make up any name you
-want for your variables, but that's not quite true.  There
+In addition, there
 are certain words that are reserved in C++ because they are
 used by the compiler to parse the structure of your program,
 and if you use them as variable names, it will get confused.
@@ -307,9 +388,8 @@ is the official language definition adopted by the the International
 Organization for Standardization (ISO) on September 1, 1998.  You
 can download a copy electronically from
 
-\begin{verbatim}
-    http://www.ansi.org/
-\end{verbatim}
+    \url{http://www.ansi.org/}
+
 %
 Rather than memorize the list, I would suggest that you
 take advantage of a feature provided in many development
@@ -349,10 +429,10 @@ the following program:
   int hour, minute;
   hour = 11;
   minute = 59;
-  cout << "Number of minutes since midnight: ";
-  cout << hour*60 + minute << endl;
-  cout << "Fraction of the hour that has passed: ";
-  cout << minute/60 << endl;
+  std::cout << "Number of minutes since midnight: ";
+  std::cout << hour*60 + minute << std::endl;
+  std::cout << "Fraction of the hour that has passed: ";
+  std::cout << minute/60 << std::endl;
 \end{verbatim}
 %
 would generate the following output:
@@ -381,10 +461,13 @@ even in cases like this where the next integer is so close.
 A possible alternative in this case is to calculate a percentage
 rather than a fraction:
 
-\begin{verbatim}
-  cout << "Percentage of the hour that has passed: ";
-  cout << minute*100/60 << endl;
+\begin{mdframed}
+\begin{verbatim} 
+  std::cout << "Percentage of the hour that has passed: ";
+  std::cout << minute*100/60 << std::endl;
 \end{verbatim}
+\end{mdframed}
+
 %
 The result is:
 

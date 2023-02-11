@@ -4,14 +4,23 @@
 
 \documentclass{book}
 \usepackage{epsfig}
-\usepackage{hyperref}
+\usepackage[pdftex,
+            pdfauthor={Your Name},
+            pdftitle={The Title},
+            pdfsubject={The Subject},
+            pdfkeywords={Some Keywords},
+            pdfproducer={Latex with hyperref, or other system},
+            pdfcreator={pdflatex, or other tool}]{hyperref}
 \usepackage{makeidx}
 \usepackage{url}
+\usepackage{mdframed}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
 \pssilent
 
 \title{Think C++}
 
-\author{Lisa Patacchiola, Allen B. Downey}
+\author{Lisa Patacchiola, Allen B. Downey (original author)}
 \date{}
 
 \sloppy
@@ -23,18 +32,18 @@
 
 \begin{document}
 
-\title {Think C++}
-\author {Lisa Patacchiola, Allen B. Downey}
-\date {Version 2.0}
+\title {Think C++, a game perspective}
+\author {Lisa Patacchiola, Allen B. Downey(original author)}
+\date {Version 2.0 alpha 0.2}
 \maketitle
 
 \vspace{2in}
 \begin{center}
-{\Large Think C++}
+{\Large Think C++, a game perspective}
 
 \vspace{0.25in}
 
-Copyright (C) 2023 Lisa Patacchiola
+Copyright (C) 2023 Lisa Patacchiola and Allen B. Downey
 \end{center}
 \vspace{0.25in}
 
@@ -45,11 +54,11 @@ International License: \url{https://creativecommons.org/licenses/by-nc/4.0/}.
 If you are interested in distributing a commercial version of this
 work, please contact the author.
 
-The \LaTeX\ source and code for this book is available from
+The \LaTeX\ source and code for this book are available from
 
-\begin{verbatim}
-https://github.com/lpatacch/ThinkCPP
-\end{verbatim}
+\bigskip
+\url{https://github.com/lpatacch/ThinkCPP}
+
 
 
 
