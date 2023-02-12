@@ -40,8 +40,8 @@ If you want to try that with the replit code, go back to the link from the last 
 \end{figure}
 You now should have a copy of the code that you can change any way you want.
 
-\index{String}
-\index{type!String}
+\index{string}
+\index{type!string}
 
 In the program. the phrases that appear in quotation marks are called {\bf strings},
 because they are made up of a sequence (string) of letters.  Actually,
@@ -257,6 +257,7 @@ the effect of the three assignment statements:
 \centerline{\epsfig{figure=assign.eps}}
 \vspace{0.1in}
 
+\index{rules!variable value}
 I sometimes use different shapes to indicate different
 variable types.  These shapes should help remind you that one of the
 rules in C++ is that a variable has to have the same type as the
@@ -308,10 +309,11 @@ we used to output simple values.
   std::cout << hour;
   std::cout << colon;
   std::cout << minute;
-  std::cout << sdt::endl;
+  std::cout << sts::endl;
 \end{verbatim}
 \end{mdframed}
 %
+Try this project here: \url{https://replit.com/@lpatacch/OutputVariables#main.cpp}.
 This program creates two integer variables named {\tt hour} and {\tt
 minute}, and a character variable named {\tt colon}.  It assigns
 appropriate values to each of the variables and then uses a series
@@ -350,6 +352,8 @@ and the special value {\tt endl}.  Very impressive!
 
 \section{Variable Naming Rules}
 \index{variable naming rules}
+\index{variable!naming rules}
+\index{rules!variable naming}
 A few sections ago, I said that you can make up any name you
 want for your variables, but that's not quite true. There are certain rules that you need to follow.
 \begin{enumerate}
@@ -362,19 +366,19 @@ want for your variables, but that's not quite true. There are certain rules that
 Here are some examples of variables that do not follow the naming rules, and what you can use instead
 \begin{mdframed}
 \begin{verbatim}
-    int 3player;    \\WRONG, can not start with a number
-    int player3;    \\This would work
-    int my3player   \\This will also work
+    int 3player;    \\ WRONG, can not start with a number
+    int player3;    \\ This would work
+    int my3player   \\ This will also work
     
-    int hit points; \\WRONG, spaces not allowed in the name
+    int hit points; \\ WRONG, spaces not allowed in the name
     int hitPoints;  \\ This would work
     int hit_points; \\ This also would work
     
-    int cash$;      \\This would not work because of $sign
-    int cashMoney;  \\changed to use words instead
+    int cash$;      \\ This would not work because of $sign
+    int cashMoney;  \\ changed to use words instead
 \end{verbatim}
 \end{mdframed}
-\section{Keywords}
+\subsection{Keywords}
 \index{keyword}
 In addition, there
 are certain words that are reserved in C++ because they are
@@ -421,9 +425,54 @@ replaced with its value before the computation is performed.
 
 \index{expression}
 
+\subsection{Not all the math operators}
+Although some of the arithmetic operators that you would expect are there, there are some that do not work in C++. Here are a few examples of what does not work, and how to write it in a different way.
+
+\begin{mdframed}
+\begin{verbatim}
+    int powerUpLevel = 2;
+    int damageLevel = 3;
+    
+    int damageGiven = powerUpLeveldamageLevel;     // WRONG 
+        // You can't just put variables next to each other
+        // to have them multiply
+        
+    int damageGiven = powerUpLevel x damageLevel;  // WRONG 
+        // You can't use x as a multiplication sign. It is
+        // often used as a variable
+        
+    int damageGiven = powerUpLevel * damageLevel; // Correct!
+        // When you multiply, you should use the * symbol
+    
+    int valToPower = powerUpLevel^2;              // WRONG
+        // Although you can use the ^ symbol for a 
+        // particular math operation, it is not to 
+        // calculate the square (or any other power)
+        // We will see this later in the book
+        
+    int valToPower = powerUpLevel * powerUpLevel; // Correct! 
+        // To square a number, you can multiply it with
+        // itself
+        // There is also another way to do this which we
+        // will see later
+        
+    int percentHurt = damageGiven ÷ 100;         // WRONG
+        // C++ does not use this division sign
+    
+    int percentHurt = damageGiven/100;           // Correct
+        // To divide, we should use the / symbol
+        // There is something about this that is an issue,
+        // that we will talk about right now.
+\end{verbatim}
+\end{mdframed}
+%
+
+\subsection{Integer Division}
 Addition, subtraction and multiplication all do what you
 expect, but you might be surprised by division.  For example,
 the following program:
+
+\begin{mdframed}
 
 \begin{verbatim}
   int hour, minute;
@@ -434,14 +483,17 @@ the following program:
   std::cout << "Fraction of the hour that has passed: ";
   std::cout << minute/60 << std::endl;
 \end{verbatim}
+\end{mdframed}
 %
+
 would generate the following output:
 
 \begin{verbatim}
-Number of minutes since midnight: 719
-Fraction of the hour that has passed: 0
+  Number of minutes since midnight: 719
+  Fraction of the hour that has passed: 0
 \end{verbatim}
 %
+Try it yourself here: \url{https://replit.com/@lpatacch/IntegerDivision#main.cpp}.
 The first line is what we expected, but the second line is
 odd.  The value of the variable {\tt minute} is 59, and
 59 divided by 60 is 0.98333, not 0.  The reason for the
@@ -472,7 +524,7 @@ rather than a fraction:
 The result is:
 
 \begin{verbatim}
-Percentage of the hour that has passed: 98
+    Percentage of the hour that has passed: 98
 \end{verbatim}
 %
 Again the result is rounded down, but at least now the answer
@@ -481,8 +533,40 @@ answer, we could use a different type of variable, called
 floating-point, that is capable of storing fractional values.
 We'll get to that in the next chapter.
 
+\subsection{Modulus operator}
+\label{modulus}
+\index{modulus}
+\index{remainder}
+\index{operator!modulus}
+\index{operator!remainder}
+There is another way to get the information that the integer division is not using. That is a new operator called the {\bf modulus}, or {\bf remainder} operator.
+
+The modulus operator works on integers (and integer expressions)
+and yields the {\em remainder} when the first operand is divided
+by the second.  In C++, the modulus operator is a percent sign,
+{\tt \%}.  The syntax is exactly the same as for other operators:
+
+\begin{verbatim}
+  int quotient = 7 / 3;
+  int remainder = 7 % 3;
+\end{verbatim}
+%
+The first operator, integer division, yields 2.  The second
+operator yields 1.  Thus, 7 divided by 3 is 2 with 1 left over.
+
+The modulus operator turns out to be surprisingly useful.  For
+example, you can check whether one number is divisible by
+another: if {\tt x \% y} is zero, then {\tt x} is divisible
+by {\tt y}.
+
+Also, you can use the modulus operator to extract the rightmost
+digit or digits from a number.  For example, {\tt x \% 10} yields
+the rightmost digit of {\tt x} (in base 10).  Similarly
+{\tt x \% 100} yields the last two digits.
+
 \section{Order of operations}
 \index{precedence}
+\index{rules!precedence}
 \index{order of operations}
 
 When more than one operator appears in an expression the order
@@ -492,7 +576,7 @@ just to get you started:
 
 \begin{itemize}
 
-\item Multiplication and division happen before
+\item Multiplication and division (and modulus) happen before
 addition and subtraction.  So {\tt 2*3-1} yields 5, not 4, and {\tt
 2/3-1} yields -1, not 1 (remember that in integer division {\tt 2/3}
 is 0).
@@ -523,7 +607,7 @@ integers also work on characters.  For example,
 \begin{verbatim}
   char letter;
   letter = 'a' + 1;
-  cout << letter << endl;
+  std::cout << letter << std::endl;
 \end{verbatim}
 %
 outputs the letter {\tt b}.  Although it is syntactically legal
@@ -538,7 +622,7 @@ legal.
 \begin{verbatim}
   int number;
   number = 'a';
-  cout << number << endl;
+  std::cout << number << std::endl;
 \end{verbatim}
 %
 The result is 97, which is the number that is used internally
@@ -576,7 +660,7 @@ integers and we know how to output values; it turns out we can
 do both at the same time:
 
 \begin{verbatim}
-    cout << 17 * 3;
+    std::cout << 17 * 3;
 \end{verbatim}
 %
 Actually, I shouldn't say ``at the same time,'' since in reality
@@ -586,7 +670,7 @@ and variables, can be used inside an output statement.  We've
 already seen one example:
 
 \begin{verbatim}
-  cout << hour*60 + minute << endl;
+  std::cout << hour*60 + minute << std::endl;
 \end{verbatim}
 %
 You can also put arbitrary expressions on the right-hand
@@ -644,6 +728,10 @@ have types, as determined by their operators and operands.
 \item[operator:] A special symbol that represents a simple
 computation like addition or multiplication.
 
+\item[modulus:]  An operator that works on integers and yields
+the remainder when one number is divided by another.  In C++
+it is denoted with a percent sign ({\tt \%}).
+
 \item[operand:] One of the values on which an operator operates. 
 
 \item[precedence:] The order in which operations are evaluated.
@@ -660,6 +748,7 @@ in order to represent complex computations concisely.
 \index{assignment}
 \index{expression}
 \index{operator}
+\index{modulus}
 \index{operand}
 \index{composition}
 
